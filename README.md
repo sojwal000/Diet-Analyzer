@@ -21,8 +21,7 @@ A web application that helps users track their nutrition, analyze their diet, an
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/diet_analizer2.git
-cd diet_analizer2
+git clone https://github.com/sojwal000/Diet-Analyzer.git
 ```
 
 2. Create and activate a virtual environment:
