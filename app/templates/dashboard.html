@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Dashboard</h1>
+
+{% if not profile %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Welcome to Diet Analyzer!</h4>
+    <p>To get started, please complete your profile information.</p>
+    <a href="{{ url_for('auth.profile') }}" class="btn btn-primary">Complete Profile</a>
+</div>
+{% else %}
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Your Profile</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Age:</strong> {{ profile.age }}</p>
+                <p><strong>Gender:</strong> {{ profile.gender.capitalize() }}</p>
+                <p><strong>Height:</strong> {{ profile.height }} cm</p>
+                <p><strong>Weight:</strong> {{ profile.weight }} kg</p>
+                <p><strong>Activity Level:</strong> {{ profile.activity_level.replace('_', ' ').capitalize() }}</p>
+                <p><strong>Goal:</strong> {{ profile.goal.replace('_', ' ').capitalize() }}</p>
+                
+                <a href="{{ url_for('auth.profile') }}" class="btn btn-outline-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Today's Nutrition</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="card nutrition-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Calories</h5>
+                                <h3 class="mb-0">{{ daily_totals.calories|round|int }}</h3>
+                                <p class="text-muted">of {{ targets.calories|round|int }}</p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" 
+                                        style="width: {{ (daily_totals.calories / targets.calories * 100) if targets.calories > 0 else 0 }}%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card nutrition-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Protein</h5>
+                                <h3 class="mb-0">{{ daily_totals.protein|round|int }}g</h3>
+                                <p class="text-muted">of {{ targets.protein|round|int }}g</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" 
+                                        style="width: {{ (daily_totals.protein / targets.protein * 100) if targets.protein > 0 else 0 }}%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card nutrition-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Carbs</h5>
+                                <h3 class="mb-0">{{ daily_totals.carbs|round|int }}g</h3>
+                                <p class="text-muted">of {{ targets.carbs|round|int }}g</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                        style="width: {{ (daily_totals.carbs / targets.carbs * 100) if targets.carbs > 0 else 0 }}%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card nutrition-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Fats</h5>
+                                <h3 class="mb-0">{{ daily_totals.fats|round|int }}g</h3>
+                                <p class="text-muted">of {{ targets.fats|round|int }}g</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" 
+                                        style="width: {{ (daily_totals.fats / targets.fats * 100) if targets.fats > 0 else 0 }}%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('nutrition.food_search') }}" class="btn btn-primary">Log Food</a>
+                    <a href="{{ url_for('nutrition.meal_logs') }}" class="btn btn-outline-primary">View Meal Logs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Recent Meals</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_logs %}
+                <div class="list-group">
+                    {% for log in recent_logs %}
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ log.food_name }}</h6>
+                            <small>{{ log.log_date.strftime('%Y-%m-%d') }}</small>
+                        </div>
+                        <p class="mb-1">
+                            <span class="badge bg-secondary">{{ log.meal_type.capitalize() }}</span>
+                            {{ log.calories|round|int }} cal | 
+                            P: {{ log.protein|round|int }}g | 
+                            C: {{ log.carbs|round|int }}g | 
+                            F: {{ log.fats|round|int }}g
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted">No recent meals logged.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Diet Plans</h5>
+            </div>
+            <div class="card-body">
+                {% if meal_plans %}
+                <div class="list-group">
+                    {% for plan in meal_plans %}
+                    <a href="{{ url_for('diet_plan.view_plan', plan_id=plan.id) }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ plan.name }}</h6>
+                            <small>{{ plan.created_at.strftime('%Y-%m-%d') }}</small>
+                        </div>
+                        <p class="mb-1">
+                            {{ plan.total_calories|round|int }} cal | 
+                            P: {{ plan.protein_target|round|int }}g | 
+                            C: {{ plan.carbs_target|round|int }}g | 
+                            F: {{ plan.fats_target|round|int }}g
+                        </p>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted">No diet plans created yet.</p>
+                {% endif %}
+                
+                <div class="d-grid gap-2 mt-3">
+                    <a href="{{ url_for('diet_plan.generate_plan') }}" class="btn btn-primary">Generate Diet Plan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

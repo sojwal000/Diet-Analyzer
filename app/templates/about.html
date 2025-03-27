@@ -1,0 +1,449 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1 class="mb-0 text-dark">About Diet Analyzer</h1>
+    </div>
+    <div class="card-body">
+        <h2 class="mb-4 text-primary">Welcome to Diet Analyzer - Your Personal Nutrition Assistant</h2>
+        
+        <p class="lead text-dark">
+            Diet Analyzer is a comprehensive tool designed to help you track your nutrition, 
+            plan your meals, and achieve your health and fitness goals.
+        </p>
+        
+        <hr class="my-4">
+        
+        <h3 class="mb-3">Features</h3>
+        
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-person-fill"></i> Personalized Profile</h4>
+                    </div>
+                    <div class="card-body text-dark">
+                        <p>Create your personalized profile by entering your:</p>
+                        <ul>
+                            <li>Age, gender, height, and weight</li>
+                            <li>Activity level</li>
+                            <li>Fitness goal (weight loss, maintenance, or muscle gain)</li>
+                        </ul>
+                        <p>Based on your profile, we calculate your:</p>
+                        <ul>
+                            <li>Basal Metabolic Rate (BMR)</li>
+                            <li>Total Daily Energy Expenditure (TDEE)</li>
+                            <li>Recommended calorie and macronutrient intake</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-search"></i> Food Search</h4>
+                    </div>
+                    <div class="card-body text-light">
+                        <p>Search for foods using our powerful food database:</p>
+                        <ul>
+                            <li>Natural language search (e.g., "1 cup oatmeal", "grilled chicken breast")</li>
+                            <li>Get detailed nutritional information for any food</li>
+                            <li>View calories, protein, carbs, and fats</li>
+                            <li>Easily log foods to your daily meal log</li>
+                        </ul>
+                        <p class="text-muted">Powered by the Nutritionix API for accurate food data.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-journal-text"></i> Meal Logging</h4>
+                    </div>
+                    <div class="card-body text-light">
+                        <p>Keep track of your daily nutrition:</p>
+                        <ul>
+                            <li>Log meals by date and meal type (breakfast, lunch, dinner, snack)</li>
+                            <li>Record serving sizes and nutritional information</li>
+                            <li>View daily totals for calories and macronutrients</li>
+                            <li>Navigate between different dates to review past meals</li>
+                            <li>Delete meal entries if needed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-calendar-check"></i> Diet Plans</h4>
+                    </div>
+                    <div class="card-body text-light">
+                        <p>Generate personalized diet plans:</p>
+                        <ul>
+                            <li>Create meal plans based on your nutritional needs</li>
+                            <li>Get food suggestions for each meal type</li>
+                            <li>View calorie and macronutrient breakdown by meal</li>
+                            <li>Save multiple diet plans for different goals</li>
+                            <li>Review and manage your saved plans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-speedometer2"></i> Dashboard</h4>
+                    </div>
+                    <div class="card-body text-light">
+                        <p>Monitor your progress at a glance:</p>
+                        <ul>
+                            <li>View your daily nutrition summary</li>
+                            <li>Track progress toward your calorie and macronutrient goals</li>
+                            <li>See recent meal logs</li>
+                            <li>Access your saved diet plans</li>
+                            <li>Quick links to all main features</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h3 class="mb-3">How to Use Diet Analyzer</h3>
+        
+        <div class="accordion mb-4" id="howToUseAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Step 1: Create an Account and Profile
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#howToUseAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Click on the <strong>Register</strong> button in the sidebar</li>
+                            <li>Fill in your username, email, and password</li>
+                            <li>After registering, log in with your credentials</li>
+                            <li>Navigate to the <strong>Profile</strong> section</li>
+                            <li>Enter your personal details:
+                                <ul>
+                                    <li>Age, gender, height, and weight</li>
+                                    <li>Activity level (sedentary, lightly active, moderately active, very active, or extra active)</li>
+                                    <li>Goal (weight loss, maintenance, or muscle gain)</li>
+                                </ul>
+                            </li>
+                            <li>Save your profile to generate personalized nutrition recommendations</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Step 2: Search for Foods and Log Meals
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#howToUseAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Go to the <strong>Food Search</strong> section from the sidebar</li>
+                            <li>Enter a food item in the search box (e.g., "1 cup oatmeal", "grilled chicken breast")</li>
+                            <li>Review the search results showing nutritional information</li>
+                            <li>Click <strong>Log This Food</strong> on any result to add it to your meal log</li>
+                            <li>On the log meal form:
+                                <ul>
+                                    <li>Adjust serving size if needed</li>
+                                    <li>Select meal type (breakfast, lunch, dinner, or snack)</li>
+                                    <li>Choose the date for the meal log</li>
+                                </ul>
+                            </li>
+                            <li>Submit the form to save the meal to your log</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Step 3: View and Manage Meal Logs
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#howToUseAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Navigate to the <strong>Meal Logs</strong> section from the sidebar</li>
+                            <li>By default, you'll see today's meal logs</li>
+                            <li>Use the date navigation to view logs from different days:
+                                <ul>
+                                    <li>Click <strong>Previous Day</strong> or <strong>Next Day</strong> to navigate between dates</li>
+                                </ul>
+                            </li>
+                            <li>Review your daily nutrition totals at the top of the page</li>
+                            <li>See all logged meals in the table below</li>
+                            <li>To delete a meal log, click the trash icon next to the entry</li>
+                            <li>To add a new meal, click the <strong>Log New Food</strong> button</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Step 4: Generate and Manage Diet Plans
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#howToUseAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Go to the <strong>Diet Plans</strong> section from the sidebar</li>
+                            <li>Review your calculated nutritional targets based on your profile</li>
+                            <li>Click <strong>Generate Diet Plan</strong> to create a new plan</li>
+                            <li>The system will generate a meal plan with:
+                                <ul>
+                                    <li>Breakfast, lunch, dinner, and snack suggestions</li>
+                                    <li>Calorie and macronutrient breakdown for each meal</li>
+                                    <li>Food suggestions that match your nutritional needs</li>
+                                </ul>
+                            </li>
+                            <li>To save the plan:
+                                <ul>
+                                    <li>Enter a name and description for your plan</li>
+                                    <li>Click <strong>Save Plan</strong></li>
+                                </ul>
+                            </li>
+                            <li>View your saved plans on the dashboard or in the Diet Plans section</li>
+                            <li>Click on any saved plan to view its details</li>
+                            <li>You can delete plans you no longer need</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Step 5: Monitor Your Progress on the Dashboard
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#howToUseAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Access your <strong>Dashboard</strong> from the sidebar</li>
+                            <li>View your profile summary</li>
+                            <li>Check your daily nutrition progress:
+                                <ul>
+                                    <li>Calories consumed vs. target</li>
+                                    <li>Protein, carbs, and fats progress</li>
+                                    <li>Visual progress bars for each nutrient</li>
+                                </ul>
+                            </li>
+                            <li>See your recent meal logs</li>
+                            <li>Access your saved diet plans</li>
+                            <li>Use quick links to log food, view meal logs, or generate new diet plans</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h3 class="mb-3">Nutrition Calculations</h3>
+        
+        <div class="card mb-4">
+            <div class="card-body text-dark">
+                <h4 class="text-primary">How We Calculate Your Nutritional Needs</h4>
+                
+                <p><strong>Basal Metabolic Rate (BMR):</strong> The number of calories your body needs at rest.</p>
+                <ul>
+                    <li><strong>For men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) + 5</li>
+                    <li><strong>For women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) - 161</li>
+                </ul>
+                
+                <p><strong>Total Daily Energy Expenditure (TDEE):</strong> BMR adjusted for your activity level.</p>
+                <ul>
+                    <li>Sedentary: BMR × 1.2</li>
+                    <li>Lightly active: BMR × 1.375</li>
+                    <li>Moderately active: BMR × 1.55</li>
+                    <li>Very active: BMR × 1.725</li>
+                    <li>Extra active: BMR × 1.9</li>
+                </ul>
+                
+                <p><strong>Calorie Targets:</strong> Adjusted based on your goal.</p>
+                <ul>
+                    <li>Weight loss: TDEE - 500 calories</li>
+                    <li>Maintenance: TDEE</li>
+                    <li>Muscle gain: TDEE + 500 calories</li>
+                </ul>
+                
+                <p><strong>Macronutrient Distribution:</strong></p>
+                <ul>
+                    <li>Protein: 30% of calories (4 calories per gram)</li>
+                    <li>Carbohydrates: 40% of calories (4 calories per gram)</li>
+                    <li>Fats: 30% of calories (9 calories per gram)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <p class="lead">Start your nutrition journey today with Diet Analyzer!</p>
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h3 class="mb-3">Tips for Success</h3>
+        
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-primary"><i class="bi bi-check2-circle"></i> Consistency</h4>
+                    </div>
+                    <div class="card-body text-dark">
+                        <p>Log your meals consistently every day for the best results. Even if you miss a day, don't give up - just start again the next day.</p>
+                        <p>Try to log your meals right after eating or use a specific time each day to update your logs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h4 class="mb-0"><i class="bi bi-graph-up"></i> Track Progress</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Regularly check your dashboard to monitor your progress toward your nutritional goals.</p>
+                        <p>Update your profile if your weight changes or if you adjust your fitness goals.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h4 class="mb-0"><i class="bi bi-calendar3"></i> Plan Ahead</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Use the diet plans feature to plan your meals for the week ahead.</p>
+                        <p>Preparing meals in advance based on your diet plan can help you stay on track with your nutrition goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h3 class="mb-3">Frequently Asked Questions</h3>
+        
+        <div class="accordion mb-4" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="false" aria-controls="faqCollapseOne">
+                        How accurate are the nutritional calculations?
+                    </button>
+                </h2>
+                <div id="faqCollapseOne" class="accordion-collapse collapse" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>Our nutritional calculations are based on widely accepted formulas used by nutritionists and fitness professionals. The Mifflin-St Jeor equation is used for BMR calculations, which is considered one of the most accurate equations for estimating energy expenditure.</p>
+                        <p>Food nutritional data comes from the Nutritionix API, which maintains a comprehensive database of foods with accurate nutritional information.</p>
+                        <p>However, individual metabolism can vary, so use these calculations as a starting point and adjust based on your personal results and experiences.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                        Can I track my weight progress over time?
+                    </button>
+                </h2>
+                <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>Currently, Diet Analyzer focuses on nutrition tracking rather than weight tracking. However, you can update your weight in your profile as it changes.</p>
+                        <p>We recommend using a dedicated weight tracking app or a simple spreadsheet alongside Diet Analyzer if tracking weight progress is important to you.</p>
+                        <p>Future updates may include weight tracking and progress visualization features.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                        What if I can't find a specific food in the search?
+                    </button>
+                </h2>
+                <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>Our food database is extensive, but there may be some specialty or regional foods that aren't included. If you can't find a specific food, try these approaches:</p>
+                        <ul>
+                            <li>Search for a similar food with comparable nutritional content</li>
+                            <li>Break down the dish into its component ingredients and log each separately</li>
+                            <li>Try different search terms or common alternative names for the food</li>
+                            <li>Use natural language queries like "1 cup of rice" or "3 oz grilled chicken"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                        How often should I update my profile information?
+                    </button>
+                </h2>
+                <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>We recommend updating your profile information whenever there are significant changes to your:</p>
+                        <ul>
+                            <li>Weight (changes of 5+ pounds/2+ kg)</li>
+                            <li>Activity level</li>
+                            <li>Fitness goals</li>
+                        </ul>
+                        <p>Regular updates ensure that your nutritional recommendations remain accurate as your body and lifestyle change over time.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+                        Can I export my nutrition data?
+                    </button>
+                </h2>
+                <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <p>Currently, Diet Analyzer doesn't have a built-in export feature. However, we're considering adding data export capabilities in future updates.</p>
+                        <p>This would allow you to export your nutrition logs and diet plans in formats like CSV or PDF for external analysis or record-keeping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <div class="text-center mb-4">
+            <h3>Ready to start your nutrition journey?</h3>
+            <p class="lead">Diet Analyzer makes it easy to track your nutrition and reach your health goals.</p>
+            <div class="d-grid gap-2 col-md-6 mx-auto">
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                {% else %}
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Register Now</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

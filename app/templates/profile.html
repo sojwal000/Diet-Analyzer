@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Your Profile</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.age.label(class="form-label") }}
+                            {% if form.age.errors %}
+                                {{ form.age(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.age.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.age(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.gender.label(class="form-label") }}
+                            {% if form.gender.errors %}
+                                {{ form.gender(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.gender.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.gender(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.height.label(class="form-label") }}
+                            {% if form.height.errors %}
+                                {{ form.height(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.height.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.height(class="form-control") }}
+                            {% endif %}
+                            <small class="form-text text-muted">Height in centimeters (cm)</small>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.weight.label(class="form-label") }}
+                            {% if form.weight.errors %}
+                                {{ form.weight(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.weight.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.weight(class="form-control") }}
+                            {% endif %}
+                            <small class="form-text text-muted">Weight in kilograms (kg)</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.activity_level.label(class="form-label") }}
+                        {% if form.activity_level.errors %}
+                            {{ form.activity_level(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.activity_level.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.activity_level(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.goal.label(class="form-label") }}
+                        {% if form.goal.errors %}
+                            {{ form.goal(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.goal.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.goal(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

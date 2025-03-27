@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to Diet Analyzer</h1>
+        <p class="col-md-8 fs-4">Your personal nutrition assistant to help you achieve your health and fitness goals.</p>
+        {% if not current_user.is_authenticated %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg px-4 me-md-2">Get Started</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+        </div>
+        {% else %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg px-4 me-md-2">Go to Dashboard</a>
+            <a href="{{ url_for('nutrition.food_search') }}" class="btn btn-outline-secondary btn-lg px-4">Search Foods</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-primary rounded-3">
+            <h2>Track Your Nutrition</h2>
+            <p>Log your meals and track your daily calorie and macronutrient intake. Our food database provides accurate nutritional information for thousands of foods.</p>
+            <a href="{{ url_for('nutrition.food_search') if current_user.is_authenticated else url_for('auth.register') }}" class="btn btn-outline-light">
+                {{ 'Search Foods' if current_user.is_authenticated else 'Sign Up' }}
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>Personalized Diet Plans</h2>
+            <p>Get a customized diet plan based on your goals, whether it's weight loss, muscle gain, or maintaining a balanced diet. We'll help you reach your nutrition targets.</p>
+            <a href="{{ url_for('diet_plan.generate_plan') if current_user.is_authenticated else url_for('auth.register') }}" class="btn btn-outline-primary">
+                {{ 'Generate Diet Plan' if current_user.is_authenticated else 'Sign Up' }}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Nutrition Lookup</h5>
+                <p class="card-text">Search our extensive database for detailed nutritional information on thousands of foods.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Meal Logging</h5>
+                <p class="card-text">Keep track of your daily food intake and monitor your progress over time.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Diet Planning</h5>
+                <p class="card-text">Get personalized meal plans based on your specific goals and dietary preferences.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

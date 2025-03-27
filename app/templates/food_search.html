@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Food Search{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Food Search</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('nutrition.food_search') }}">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                {{ form.query(class="form-control", placeholder="Search for a food (e.g., 'apple', '1 cup rice', 'chicken breast')") }}
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </div>
+            <small class="form-text text-muted">
+                Try natural language queries like "2 eggs", "1 cup oatmeal", or "grilled chicken breast"
+            </small>
+        </form>
+    </div>
+</div>
+
+{% if results %}
+<h2 class="mb-3">Search Results</h2>
+<div class="row">
+    {% for food in results %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{ food.food_name }}</h5>
+                <span class="badge bg-primary">{{ food.serving_qty }} {{ food.serving_unit }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <p><strong>Calories:</strong> {{ food.nf_calories|round|int }}</p>
+                        <p><strong>Protein:</strong> {{ food.nf_protein|round|int }}g</p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>Carbs:</strong> {{ food.nf_total_carbohydrate|round|int }}g</p>
+                        <p><strong>Fats:</strong> {{ food.nf_total_fat|round|int }}g</p>
+                    </div>
+                </div>
+                
+                <div class="d-grid">
+                    <a href="{{ url_for('nutrition.log_meal', 
+                        food_name=food.food_name, 
+                        calories=food.nf_calories, 
+                        protein=food.nf_protein, 
+                        carbs=food.nf_total_carbohydrate, 
+                        fats=food.nf_total_fat) }}" 
+                        class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Log This Food
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% elif form.query.data %}
+<div class="alert alert-info">
+    No results found for "{{ form.query.data }}". Try a different search term.
+</div>
+{% endif %}
+
+<div class="mt-3">
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

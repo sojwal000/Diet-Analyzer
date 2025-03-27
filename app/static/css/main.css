@@ -1,0 +1,2406 @@
+/* Main Styles for Diet Analyzer - Modern Dark Theme */
+
+:root {
+    --bg-color: #0f0f0f;
+    --text-color: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --card-bg: #1a1a1a;
+    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --primary-color: #c1ff00;
+    --primary-dark: #a6d800;
+    --secondary-color: #333333;
+    --success-color: #00e676;
+    --info-color: #c1ff00;  /* Changed from blue to match theme */
+    --warning-color: #ffea00;
+    --danger-color: #ff1744;
+    --light-color: #2a2a2a;
+    --dark-color: #ffffff;
+    --navbar-bg: #0f0f0f;
+    --sidebar-bg: #0f0f0f;
+    --sidebar-text: rgba(255, 255, 255, 0.8);
+    --sidebar-hover: rgba(193, 255, 0, 0.1);
+    --sidebar-active: #c1ff00;
+    --accent-gradient: linear-gradient(135deg, #c1ff00, #00e676);
+    --card-hover-transform: translateY(-5px);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+/* Typography Improvements */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-header {
+    padding: 25px 15px;
+}
+
+.sidebar-brand {
+    color: var(--primary-color) !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(193, 255, 0, 0.3);
+}
+
+.sidebar-item {
+    color: var(--sidebar-text);
+    padding: 12px 20px;
+    margin: 4px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-item:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.sidebar-item.active {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sidebar-item i {
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.sidebar-footer {
+    padding: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-toggler {
+    color: var(--primary-color);
+    border: none;
+}
+
+.navbar-light .navbar-toggler-icon {
+    filter: invert(1) brightness(2);
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: var(--card-hover-transform);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    padding: 15px 20px;
+    color: var(--primary-color);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    color: var(--text-color);
+}
+
+/* Nutrition Cards */
+.nutrition-card {
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+    background-color: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.nutrition-card:hover {
+    transform: var(--card-hover-transform);
+}
+
+.macro-card {
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.macro-card:hover {
+    transform: scale(1.03);
+}
+
+.protein-card {
+    background-color: rgba(193, 255, 0, 0.1);
+    border: 1px solid rgba(193, 255, 0, 0.2);
+}
+
+.protein-card h5 {
+    color: var(--primary-color);
+}
+
+.carbs-card {
+    background-color: rgba(193, 255, 0, 0.1);
+    border: 1px solid rgba(193, 255, 0, 0.2);
+}
+
+.carbs-card h5 {
+    color: #c1ff00;
+}
+
+.fats-card {
+    background-color: rgba(255, 234, 0, 0.1);
+    border: 1px solid rgba(255, 234, 0, 0.2);
+}
+
+.fats-card h5 {
+    color: #ffea00;
+}
+
+.food-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+}
+
+.food-item:hover {
+    transform: var(--card-hover-transform);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress Bars */
+.progress {
+    height: 10px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-image: var(--accent-gradient);
+    border-radius: 10px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #000000;
+    font-weight: 600;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(193, 255, 0, 0.3);
+    color: #000000;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background-color: var(--primary-color);
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.btn-outline-light {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.btn-outline-light:hover, .btn-outline-light:focus {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Additional Bootstrap compatibility classes */
+
+/* Button variants */
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    color: #000000;
+}
+
+.btn-success:hover, .btn-success:focus {
+    background-color: #00c967;
+    border-color: #00c967;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 230, 118, 0.3);
+}
+
+.btn-info {
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+    color: #000000;
+}
+
+.btn-info:hover, .btn-info:focus {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(193, 255, 0, 0.3);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: #000000;
+}
+
+.btn-warning:hover, .btn-warning:focus {
+    background-color: #e6d100;
+    border-color: #e6d100;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 234, 0, 0.3);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: #ffffff;
+}
+
+.btn-danger:hover, .btn-danger:focus {
+    background-color: #e3002e;
+    border-color: #e3002e;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 23, 68, 0.3);
+}
+
+/* Fix for alert-info color */
+.alert-info {
+    background-color: rgba(193, 255, 0, 0.1);
+    border-color: rgba(193, 255, 0, 0.2);
+    color: var(--primary-color);
+}
+
+/* Fix for white backgrounds */
+.bg-white {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6 {
+    color: #212529;
+    text-shadow: none;
+}
+
+.bg-white .card-header {
+    color: #212529;
+}
+
+/* Fix for light backgrounds */
+.bg-light {
+    background-color: var(--light-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Fix for Bootstrap's form controls in light backgrounds */
+.bg-white .form-control, .bg-white .form-select,
+.bg-light .form-control, .bg-light .form-select {
+    background-color: #ffffff;
+    color: #212529;
+    border-color: #ced4da;
+}
+
+.bg-white .form-control:focus, .bg-white .form-select:focus,
+.bg-light .form-control:focus, .bg-light .form-select:focus {
+    background-color: #ffffff;
+    color: #212529;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(193, 255, 0, 0.25);
+}
+
+.bg-white .form-control::placeholder, .bg-light .form-control::placeholder {
+    color: #6c757d;
+}
+
+/* Fix for Bootstrap's tables in light backgrounds */
+.bg-white .table, .bg-light .table {
+    color: #212529;
+}
+
+.bg-white .table th, .bg-light .table th {
+    color: #212529;
+}
+
+/* Fix for Bootstrap's list groups in light backgrounds */
+.bg-white .list-group-item, .bg-light .list-group-item {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+/* Fix for Bootstrap's cards in light backgrounds */
+.bg-white .card, .bg-light .card {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+.bg-white .card-header, .bg-light .card-header {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #212529;
+}
+
+/* Fix for Bootstrap's modals in light backgrounds */
+.bg-white .modal-content, .bg-light .modal-content {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+.bg-white .modal-header, .bg-light .modal-header {
+    border-bottom-color: #dee2e6;
+}
+
+.bg-white .modal-footer, .bg-light .modal-footer {
+    border-top-color: #dee2e6;
+}
+
+/* Fix for Bootstrap's dropdowns in light backgrounds */
+.bg-white .dropdown-menu, .bg-light .dropdown-menu {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+.bg-white .dropdown-item, .bg-light .dropdown-item {
+    color: #212529;
+}
+
+.bg-white .dropdown-item:hover, .bg-white .dropdown-item:focus,
+.bg-light .dropdown-item:hover, .bg-light .dropdown-item:focus {
+    background-color: rgba(193, 255, 0, 0.1);
+    color: #212529;
+}
+
+/* Additional utility classes */
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+.border-secondary {
+    border-color: var(--secondary-color) !important;
+}
+
+.border-success {
+    border-color: var(--success-color) !important;
+}
+
+.border-info {
+    border-color: var(--info-color) !important;
+}
+
+.border-warning {
+    border-color: var(--warning-color) !important;
+}
+
+.border-danger {
+    border-color: var(--danger-color) !important;
+}
+
+.border-light {
+    border-color: var(--border-color) !important;
+}
+
+.border-dark {
+    border-color: var(--bg-color) !important;
+}
+
+/* Fix for Bootstrap's badges */
+.badge {
+    font-weight: 600;
+    padding: 0.35em 0.65em;
+    border-radius: 50rem;
+}
+
+.badge.bg-primary {
+    color: #000000;
+}
+
+.badge.bg-secondary {
+    color: #ffffff;
+}
+
+.badge.bg-success {
+    color: #000000;
+}
+
+.badge.bg-info {
+    color: #000000;
+}
+
+.badge.bg-warning {
+    color: #000000;
+}
+
+.badge.bg-danger {
+    color: #ffffff;
+}
+
+.badge.bg-light {
+    color: var(--text-color);
+}
+
+.badge.bg-dark {
+    color: #ffffff;
+}
+
+/* Fix for Bootstrap's navs and tabs */
+.nav-link {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+.nav-tabs {
+    border-bottom-color: var(--border-color);
+}
+
+.nav-tabs .nav-link {
+    border-radius: 8px 8px 0 0;
+    border: 1px solid transparent;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border-color: var(--border-color) var(--border-color) transparent;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--card-bg);
+    border-color: var(--border-color) var(--border-color) transparent;
+}
+
+.tab-content {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+}
+
+/* Fix for Bootstrap's input groups */
+.input-group-text {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Fix for Bootstrap's toasts */
+.toast {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.toast-header {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--primary-color);
+    border-bottom-color: var(--border-color);
+}
+
+.toast-body {
+    color: var(--text-color);
+}
+
+/* Fix for Bootstrap's spinners */
+.spinner-border, .spinner-grow {
+    color: var(--primary-color);
+}
+
+/* Fix for Bootstrap's progress bars with text */
+.progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+/* Fix for Bootstrap's accordion */
+.accordion-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.accordion-button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(193, 255, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.accordion-button:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(193, 255, 0, 0.25);
+}
+
+.accordion-button::after {
+    filter: invert(1);
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: brightness(0) saturate(100%) invert(88%) sepia(29%) saturate(1011%) hue-rotate(42deg) brightness(105%) contrast(103%);
+}
+
+.accordion-body {
+    color: var(--text-color);
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-info {
+    color: var(--info-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+.text-light {
+    color: var(--text-color) !important;
+}
+
+.text-dark {
+    color: var(--dark-color) !important;
+}
+
+/* About Section Styles */
+.about-section {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+.about-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+}
+
+.about-section p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.about-section .highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.about-section .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.about-section .feature-list li {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.about-section .feature-list li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* About section cards */
+.about-feature-card {
+    background-color: rgba(26, 26, 26, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.about-feature-card h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.about-feature-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Profile Form Styles */
+.form-control, .form-select {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #1a1a1a;
+    border-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.form-text {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Profile Section Header */
+.profile-header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* Dashboard List Styles */
+.list-group-item {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    margin-bottom: 4px;
+    border-radius: 8px;
+}
+
+.list-group-item:hover {
+    background-color: #242424;
+}
+
+.list-group-item .badge {
+    background-color: rgba(193, 255, 0, 0.2);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Recent Meals and Diet Plans specific styles */
+.recent-meals .list-group-item,
+.diet-plans .list-group-item {
+    background-color: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+}
+
+/* Meal Logs Table Styles */
+.table {
+    color: #ffffff;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table thead {
+    background-color: #242424;
+}
+
+.table thead th {
+    background-color: #242424;
+    color: var(--primary-color);
+    border-color: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+}
+
+.table th {
+    background-color: #242424;
+    color: var(--primary-color);
+    border-color: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+}
+
+.table td {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.1);
+    vertical-align: middle;
+    background-color: #1a1a1a;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {
+    background-color: #242424;
+}
+
+.table tbody tr {
+    background-color: #1a1a1a;
+}
+
+.table tbody tr:hover {

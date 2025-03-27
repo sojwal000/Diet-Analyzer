@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Food Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">{{ food.food_name }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Nutrition Facts</h5>
+                        <p><strong>Serving Size:</strong> {{ food.serving_qty }} {{ food.serving_unit }}</p>
+                        <p><strong>Calories:</strong> {{ food.nf_calories|round|int }}</p>
+                        <p><strong>Protein:</strong> {{ food.nf_protein|round|int }}g</p>
+                        <p><strong>Carbohydrates:</strong> {{ food.nf_total_carbohydrate|round|int }}g</p>
+                        <p><strong>Fat:</strong> {{ food.nf_total_fat|round|int }}g</p>
+                        {% if food.nf_dietary_fiber %}
+                        <p><strong>Fiber:</strong> {{ food.nf_dietary_fiber|round|int }}g</p>
+                        {% endif %}
+                        {% if food.nf_sugars %}
+                        <p><strong>Sugars:</strong> {{ food.nf_sugars|round|int }}g</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="macro-card protein-card">
+                            <h6>Protein</h6>
+                            <h4>{{ food.nf_protein|round|int }}g</h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" 
+                                    style="width: {{ (food.nf_protein / (food.nf_protein + food.nf_total_carbohydrate + food.nf_total_fat) * 100)|round|int }}%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="macro-card carbs-card">
+                            <h6>Carbohydrates</h6>
+                            <h4>{{ food.nf_total_carbohydrate|round|int }}g</h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" 
+                                    style="width: {{ (food.nf_total_carbohydrate / (food.nf_protein + food.nf_total_carbohydrate + food.nf_total_fat) * 100)|round|int }}%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="macro-card fats-card">
+                            <h6>Fats</h6>
+                            <h4>{{ food.nf_total_fat|round|int }}g</h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" 
+                                    style="width: {{ (food.nf_total_fat / (food.nf_protein + food.nf_total_carbohydrate + food.nf_total_fat) * 100)|round|int }}%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('nutrition.log_meal', 
+                                food_name=food.food_name, 
+                                calories=food.nf_calories, 
+                                protein=food.nf_protein, 
+                                carbs=food.nf_total_carbohydrate, 
+                                fats=food.nf_total_fat) }}" 
+                        class="btn btn-primary">Log This Food</a>
+                    <a href="{{ url_for('nutrition.food_search') }}" class="btn btn-outline-secondary">Back to Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

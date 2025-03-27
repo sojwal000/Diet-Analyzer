@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}View Diet Plan{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ meal_plan.name }}</h1>
+    <div>
+        <a href="{{ url_for('diet_plan.generate_plan') }}" class="btn btn-outline-primary">Generate New Plan</a>
+        <form action="{{ url_for('diet_plan.delete_plan', plan_id=meal_plan.id) }}" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this plan?')">Delete Plan</button>
+        </form>
+    </div>
+</div>
+
+<p class="lead mb-4">{{ meal_plan.description }}</p>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card nutrition-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Calories</h5>
+                <h3 class="mb-0">{{ meal_plan.total_calories|round|int }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card nutrition-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Protein</h5>
+                <h3 class="mb-0">{{ meal_plan.protein_target|round|int }}g</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card nutrition-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Carbs</h5>
+                <h3 class="mb-0">{{ meal_plan.carbs_target|round|int }}g</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card nutrition-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Fats</h5>
+                <h3 class="mb-0">{{ meal_plan.fats_target|round|int }}g</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for meal_type, data in meal_data.items() %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">{{ data.name }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <p><strong>Calories:</strong> {{ data.calories|round|int }}</p>
+                        <p><strong>Protein:</strong> {{ data.protein|round|int }}g</p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>Carbs:</strong> {{ data.carbs|round|int }}g</p>
+                        <p><strong>Fats:</strong> {{ data.fats|round|int }}g</p>
+                    </div>
+                </div>
+                
+                <h6>Foods:</h6>
+                <ul class="list-group">
+                    {% for food_item in data.food_items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ food_item.food_name }}
+                        <span class="badge bg-primary rounded-pill">{{ food_item.calories|round|int }} cal</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create macro distribution chart
+        const ctx = document.getElementById('macroChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Protein', 'Carbs', 'Fats'],
+                    datasets: [{
+                        data: [
+                            {{ meal_plan.protein_target }}, 
+                            {{ meal_plan.carbs_target }}, 
+                            {{ meal_plan.fats_target }}
+                        ],
+                        backgroundColor: ['#0dcaf0', '#198754', '#ffc107'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Macro Distribution'
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

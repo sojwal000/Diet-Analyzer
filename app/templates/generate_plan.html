@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Diet Plan{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Generate Diet Plan</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Your Nutrition Targets</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Daily Calories:</strong> {{ total_calories|round|int }}</p>
+                <p><strong>Protein Target:</strong> {{ total_protein|round|int }}g</p>
+                <p><strong>Carbs Target:</strong> {{ total_carbs|round|int }}g</p>
+                <p><strong>Fats Target:</strong> {{ total_fats|round|int }}g</p>
+                
+                <div class="mt-3">
+                    <canvas id="macroChart" 
+                        data-protein="{{ total_protein }}" 
+                        data-carbs="{{ total_carbs }}" 
+                        data-fats="{{ total_fats }}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Your Diet Plan</h5>
+            </div>
+            <div class="card-body">
+                <p>Based on your profile and goals, here's a suggested diet plan:</p>
+                
+                <form id="savePlanForm" action="{{ url_for('diet_plan.save_plan') }}" method="POST">
+                    <input type="hidden" name="total_calories" value="{{ total_calories }}">
+                    <input type="hidden" name="protein_target" value="{{ total_protein }}">
+                    <input type="hidden" name="carbs_target" value="{{ total_carbs }}">
+                    <input type="hidden" name="fats_target" value="{{ total_fats }}">
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="plan_name" class="form-label">Plan Name</label>
+                                <input type="text" class="form-control" id="plan_name" name="plan_name" required 
+                                    value="{{ profile.goal.replace('_', ' ').capitalize() }} Diet Plan">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="plan_description" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="plan_description" name="plan_description" 
+                                    value="Custom plan for {{ profile.goal.replace('_', ' ') }} - {{ total_calories|round|int }} calories">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion" id="mealPlanAccordion">
+                        {% for meal_type, meal_data in meal_plan.items() %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ meal_type }}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapse{{ meal_type }}" aria-expanded="true" 
+                                    aria-controls="collapse{{ meal_type }}">
+                                    {{ meal_type.capitalize() }} 
+                                    <span class="badge bg-primary ms-2">{{ meal_data.calories|round|int }} cal</span>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ meal_type }}" class="accordion-collapse collapse show" 
+                                aria-labelledby="heading{{ meal_type }}" data-bs-parent="#mealPlanAccordion">
+                                <div class="accordion-body">
+                                    <input type="hidden" name="{{ meal_type }}_calories" value="{{ meal_data.calories }}">
+                                    <input type="hidden" name="{{ meal_type }}_protein" value="{{ meal_data.protein }}">
+                                    <input type="hidden" name="{{ meal_type }}_carbs" value="{{ meal_data.carbs }}">
+                                    <input type="hidden" name="{{ meal_type }}_fats" value="{{ meal_data.fats }}">
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <p><strong>Calories:</strong> {{ meal_data.calories|round|int }}</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><strong>Protein:</strong> {{ meal_data.protein|round|int }}g</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><strong>Carbs:</strong> {{ meal_data.carbs|round|int }}g</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><strong>Fats:</strong> {{ meal_data.fats|round|int }}g</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <h6>Suggested Foods:</h6>
+                                    <div class="meal-suggestion">
+                                        {% for food in meal_data.foods %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked 
+                                                id="{{ meal_type }}_food_{{ loop.index }}" 
+                                                name="{{ meal_type }}_food_{{ loop.index }}" 
+                                                value="{{ food }}">
+                                            <label class="form-check-label" for="{{ meal_type }}_food_{{ loop.index }}">
+                                                {{ food }}
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                        <input type="hidden" name="{{ meal_type }}_foods" 
+                                            value="{{ meal_data.foods|join('|') }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">Save Diet Plan</button>
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
